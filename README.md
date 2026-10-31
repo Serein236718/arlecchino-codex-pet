@@ -1,55 +1,56 @@
 # 阿蕾奇诺 Q 版 · Codex / ChatGPT 桌面版虚拟宠物
 
-给 Codex / ChatGPT 桌面版用的自定义宠物皮肤。装好之后，她会站在窗口角落，会呼吸、会跟着你的操作切换状态、鼠标移动时会转视线。
+一只会站在你 Codex / ChatGPT 桌面版窗口角落里的小人。
+
+装好之后她会待在那儿自己呼吸、眨眼；你让她干活时她进入工作状态，任务跑完她做个完成动作，出错时她会垮下来；鼠标移动的时候她的视线会跟着动。
 
 <p align="center">
-  <img src="preview/demo-v1.gif" width="216" alt="preview">
+  <img src="preview/demo-v1.gif" width="216" alt="预览">
 </p>
 
-仓库里有两套皮肤，造型不同，按喜好选一个（也可以两个都装）：
+> 这是**非商业同人作品**，角色版权归米哈游所有，仅供个人使用。和米哈游、OpenAI 都没有关系。
 
-| 皮肤 | 造型 | 目录 |
+## 先决定装哪一个
+
+仓库里有两套皮肤，画风不同，选一个就行（也可以两个都装，装完在设置里随时切换）：
+
+| | **持镰版**（推荐） | **原型版** |
 |---|---|---|
-| **持镰版**（推荐） | 白发、赤红 X 瞳、黑红礼服，右手持迷你镰刀 | `pets/arlecchino-chibi/` |
-| **原型版** | 黑发礼帽、黑红礼服，由单张立绘确定性派生 | `pets/arlecchino-chibi-v2/` |
+| 长什么样 | 白发、赤红 X 形瞳孔、黑红礼服，右手拿一把小镰刀 | 黑发礼帽、黑红礼服，就是原来那张立绘的样子 |
+| 目录名 | `pets/arlecchino-chibi/` | `pets/arlecchino-chibi-v2/` |
+| 应用里显示的名字 | 阿蕾奇诺 | 阿蕾奇诺 原型版 |
+| 体积 | 1.77 MB | 1.45 MB |
 
-## 快速安装
+两套都能用、都符合应用的要求，差别只在"动作是怎么来的"，具体见下方[两套皮肤到底差在哪](#两套皮肤到底差在哪)。**第一次装建议选持镰版**，动作更丰富。
 
-宠物就是一个文件夹，放进 `~/.codex/pets/` 下即可。
+## 安装
 
-### Windows（PowerShell）
+关键要先明白一件事：**宠物不是"安装软件"，它就是一个文件夹。**
 
-```powershell
-git clone https://github.com/Serein236718/arlecchino-codex-pet.git
-cd arlecchino-codex-pet
-powershell -ExecutionPolicy Bypass -File .\install.ps1
-```
+应用每次启动时会去 `~/.codex/pets/` 这个目录里翻一遍，谁里面同时有 `pet.json` 和 `spritesheet.webp` 两个文件，谁就是一个可用的宠物。
 
-装指定一个：
+所以安装的全部工作就一句话：**把 `pets/` 下面那个文件夹，搬到 `~/.codex/pets/` 里面去。**
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\install.ps1 -Pet arlecchino-chibi
-```
+下面两种做法效果完全一样，任选一个。
 
-### macOS / Linux
+### 方法一：手动复制（不用敲命令，推荐）
 
-```bash
-git clone https://github.com/Serein236718/arlecchino-codex-pet.git
-cd arlecchino-codex-pet
-bash install.sh              # 全部安装
-bash install.sh arlecchino-chibi   # 只装一个
-```
+**第 1 步**　打开仓库页面，点绿色的 `Code` 按钮 → `Download ZIP`，下载完解压。
 
-### 手动安装
+**第 2 步**　打开解压出来的文件夹，进去找到 `pets` 文件夹。里面有两个子文件夹：`arlecchino-chibi` 和 `arlecchino-chibi-v2`。
 
-把 `pets/<皮肤名>/` 整个目录复制到：
+**第 3 步**　把你要的那个**子文件夹**复制到下面这个位置（注意：复制子文件夹，不是复制整个 `pets`）：
 
-| 系统 | 目标路径 |
+| 你的系统 | 复制到哪里 |
 |---|---|
-| Windows | `C:\Users\<你>\.codex\pets\` |
+| Windows | `C:\Users\<你的用户名>\.codex\pets\` |
 | macOS / Linux | `~/.codex/pets/` |
 
-复制完目录结构应该是：
+Windows 上最快的办法：随便打开一个文件夹窗口，在顶部地址栏里粘贴 `%USERPROFILE%\.codex\pets\` 然后回车，就直接跳过去了。
+
+如果 `.codex` 或 `pets` 这两个文件夹不存在，自己新建一个。**`.codex` 前面的那个点不能漏**，它就是这个文件夹名的一部分。
+
+**第 4 步**　确认层级对不对。最后必须长成这样：
 
 ```
 ~/.codex/pets/arlecchino-chibi/
@@ -57,87 +58,187 @@ bash install.sh arlecchino-chibi   # 只装一个
 └── spritesheet.webp
 ```
 
-> **必须彻底退出应用再重新打开**（托盘图标右键退出，不是最小化）。应用只在启动时扫描宠物目录。
+也就是说，`pet.json` 的**上一级文件夹**名字就得是 `arlecchino-chibi`。
+
+如果变成了 `...\pets\arlecchino-chibi\arlecchino-chibi\pet.json`（多套了一层），应用会完全看不见这个宠物 —— 这是新手最容易踩的坑，没有之一。
+
+**第 5 步**　继续看下面的「最后一步：重启应用」，这一步两种方法都得做。
+
+### 方法二：用脚本一键装
+
+前提是本机装了 Git。没装也没关系，走方法一就行，结果一模一样。
+
+**Windows**　按 Win 键，输入 `powershell` 回车，把下面三行依次粘贴进去、每行回车：
+
+```powershell
+# 第 1 行：把仓库整个下载到当前目录
+git clone https://github.com/Serein236718/arlecchino-codex-pet.git
+
+# 第 2 行：走进刚下载出来的那个文件夹
+cd arlecchino-codex-pet
+
+# 第 3 行：运行安装脚本，它会替你把文件夹复制到位
+powershell -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+三行都是**复制粘贴**的，不用手打。几个可能让你犯迷糊的地方：
+
+- **`-ExecutionPolicy Bypass` 是干什么的**：Windows 默认不允许运行 `.ps1` 脚本，不加这个参数会报"因为在此系统上禁止运行脚本"。它的意思只是"这一次放行"，不会改你系统的任何设置，窗口关掉就恢复原样。
+- **`.\` 为什么不能省**：它表示"当前文件夹里的这个文件"。只写 `install.ps1`，PowerShell 可能跑去找别处的同名程序，而不是这个脚本。
+- **第 3 行其实可以不执行**：它做的就是把 `pets\<皮肤名>` 复制到 `%USERPROFILE%\.codex\pets\`，手动做同样的事完全等效。脚本只是省几步鼠标操作。
+- **要不要管理员权限**：不用。它只往你自己的用户文件夹里写东西。
+- **重复运行会不会搞坏**：不会。脚本发现目标位置已经有同名文件夹，会先删掉再复制，所以结果是干净的。
+
+**只装其中一个**，在第 3 行后面加个 `-Pet` 参数：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\install.ps1 -Pet arlecchino-chibi
+```
+
+`-Pet` 后面跟的必须是 `pets/` 里真实存在的文件夹名字，写错会提示 `unknown pet` 并列出可选项。
+
+成功的提示长这样：
+
+```
+installed arlecchino-chibi -> C:\Users\你的用户名\.codex\pets\arlecchino-chibi
+Done. Fully quit the app (tray icon -> Quit, not just minimize) and relaunch.
+```
+
+看到 `installed` 和 `Done.` 就成了。
+
+**macOS / Linux**　同样三行，脚本换成 `install.sh`：
+
+```bash
+git clone https://github.com/Serein236718/arlecchino-codex-pet.git
+cd arlecchino-codex-pet
+bash install.sh                     # 两个都装
+bash install.sh arlecchino-chibi    # 只装一个
+```
+
+### 最后一步：重启应用（两种方法都得做）
+
+> **一定要彻底退出应用再打开。** 点窗口右上角的 × 只是把它最小化到托盘，进程还在跑，它不会重新去翻宠物目录 —— 于是你以为装失败了，其实只是没重启。
 >
-> 然后在 设置 → 个性化 → Pets（或 Work 模式标题旁那只宠物图标）里选择「阿蕾奇诺」。
+> 正确做法：右下角托盘里找到它的图标 → 右键 → `Quit` / 退出。
+>
+> 重新打开后，进 设置 → 个性化 → Pets（或者点 Work 模式标题旁边那只宠物图标），在里面选「阿蕾奇诺」。
+
+### 装完没反应？对照这张表
+
+| 你看到的 | 原因 | 怎么办 |
+|---|---|---|
+| `git : 无法将“git”项识别为 cmdlet` | 电脑上没装 Git | 改用方法一，或去 git-scm.com 装 Git |
+| `无法加载文件 ... 因为在此系统上禁止运行脚本` | 漏了 `-ExecutionPolicy Bypass` | 补上这个参数重试 |
+| `找不到路径` 或 `cd` 报错 | 当前目录里没有那个文件夹 | 用完整路径：`cd C:\Users\<你>\arlecchino-codex-pet` |
+| 重启后 Pets 列表里根本没有它 | 只最小化没真正退出；或目录多套了一层 | 托盘右键退出；按第 4 步检查 `pet.json` 的上级目录名 |
+| 列表里有名字，但选中后什么都不显示 | `spritesheet.webp` 缺失或复制坏了 | 把整个文件夹删掉，重新复制一遍 |
 
 ## 卸载
 
-删掉对应目录，重启应用即可：
+删掉对应文件夹，重启应用，就干净了，不留任何残留。
+
+macOS / Linux：
 
 ```bash
 rm -rf ~/.codex/pets/arlecchino-chibi
 ```
 
-Windows：
+Windows（PowerShell）：
 
 ```powershell
 Remove-Item -Recurse "$HOME\.codex\pets\arlecchino-chibi"
 ```
 
-## 图集规格
+不想用命令，直接在资源管理器里删文件夹也一样。
 
-两套皮肤都符合 Codex 的 v2 宠物契约：
+## 两套皮肤到底差在哪
 
-| 项目 | 值 |
-|---|---|
-| 尺寸 | 1536 × 2288 |
-| 网格 | 8 列 × 11 行 |
-| 单元格 | 192 × 208，透明背景 |
-| 元数据 | `pet.json` 中 `spriteVersionNumber: 2` |
+两套都是合法的宠物包，都能正常用。区别是**那 88 张动作图是怎么做出来的**。
 
-各行含义：
+<div align="center">
+  <img src="preview/demo-v1.gif" width="150" alt="持镰版">
+  <img src="preview/demo-v2.gif" width="150" alt="原型版">
+</div>
 
-| 行 | 状态 | 帧数 |
+**持镰版**：11 行动作是逐行单独画的，每个状态都有自己的一套姿势。挥手是真的在挥手，摔倒了是真的垮下去，16 个朝向是真的画了不同角度的侧脸。
+
+**原型版**：全部 88 格都由同一张正面立绘变形而来 —— 放大缩小、绕脚底倾斜、左右镜像，一步重绘都没有。
+
+这样做的好处和代价都很明显：
+
+| | 持镰版 | 原型版 |
 |---|---|---|
-| 0 | idle（第 7 格为正面中性帧，用于视线归零） | 6 + 1 |
+| 挥手、失败这类需要肢体变化的动作 | 有真实的手和身体动作 | 只有整体缩放、歪一下，动作幅度小 |
+| 16 个方向的"转头" | 真的换了角度 | 把画面压窄 + 侧倾，做出"转过去了"的错觉，正面图无法凭空变出侧脸 |
+| 形象一致性 | 每个姿势略有差异 | 100% 一致，绝不会跑形 |
+| 制作成本 | 高，每行都要单独画 | 极低，一张图搞定 |
+
+一句话：想要动作生动选持镰版，想要"和立绘一模一样"选原型版。
+
+## 想自己做一只？
+
+完全可以。宠物包本质上就是「一张图 + 一个 JSON」，不需要打包、不需要编译。
+
+### 图集长什么样
+
+把 88 张动作图按顺序铺在一张画布上，像一张贴纸板，应用运行时按格子去取。这就是精灵图集（sprite sheet）。这套皮肤用的是 v2 规格：
+
+| 项目 | 要求 |
+|---|---|
+| 整张画布尺寸 | 1536 × 2288 像素 |
+| 网格 | 8 列 × 11 行，共 88 格 |
+| 每格大小 | 192 × 208 像素 |
+| 背景 | 必须是透明的 |
+| `pet.json` 里要写 | `"spriteVersionNumber": 2` |
+
+<p align="center">
+  <img src="preview/atlas-v1.jpg" width="560" alt="图集">
+</p>
+
+每一行对应一个状态，行内第几格就是第几帧：
+
+| 行 | 状态 | 需要几帧 |
+|---|---|---|
+| 0 | 待机（第 7 格是正面中性帧，用来把视线归零） | 6 + 1 |
 | 1 / 2 | 向右跑 / 向左跑 | 8 / 8 |
 | 3 | 挥手 | 4 |
 | 4 | 跳跃 | 5 |
 | 5 | 失败 / 萎靡 | 8 |
 | 6 | 等待 | 6 |
-| 7 | 工作 | 6 |
+| 7 | 工作中 | 6 |
 | 8 | 完成展示 | 6 |
-| 9 / 10 | 16 个顺时针朝向（每行 8 格，000° → 337.5°） | 8 / 8 |
+| 9 / 10 | 16 个顺时针朝向，每行 8 格，000° → 337.5° | 8 / 8 |
 
-## 两套皮肤的差别
+这里有个硬规矩：**一行能放 8 格，但有些状态用不满 8 格，用不满的格子必须留成全透明**，不能拿别的帧去凑数，否则校验会报 `unused column is not transparent`。
 
-**持镰版**：11 行动作是逐行生成的，每个状态有独立姿态，朝向行有真实的转头。
+### 两个现成的脚本
 
-**原型版**：全部 88 格由同一张正面立绘做仿射变换（缩放、绕脚底旋转、镜像）派生，没有任何重绘。好处是形象百分之百一致、体积极小；代价是挥手、失败这类需要肢体变化的状态只有整体形变，朝向行是「宽度压缩 + 侧倾」伪装的转身，不是真 3D 转头。
+`tools/` 下的两个脚本可以直接拿来改成你自己的角色（需要 Python 3，外加 Pillow 和 numpy）：
 
-<p align="center">
-  <img src="preview/demo-v2.gif" width="216" alt="preview v2">
-</p>
-
-## 自己做一个
-
-`tools/` 下有两个可以直接复用的脚本（需要 Python 3 与 Pillow、numpy）：
-
-- `build_atlas.py`：把「一行多姿势」的图切分、抠色、归一化基线，拼成 8×11 图集
-- `build_from_frame.py`：只用一张立绘，靠仿射变换派生 88 格，零重绘
+- **`build_atlas.py`** —— 适合"每个状态单独画好一张图"的做法。它负责把一行里的多个姿势切开、去掉背景色、对齐脚底线，再拼成 8×11 图集。
+- **`build_from_frame.py`** —— 懒人版：只给一张正面立绘，靠缩放、倾斜、镜像派生出全部 88 格，零重绘。
 
 ```bash
-python tools/build_from_frame.py --src path/to/your_character.png --out build/
+python tools/build_from_frame.py --src path/to/你的角色.png --out build/
 ```
 
-产物 `build/spritesheet.webp` + 一个 `pet.json` 就是完整宠物包。
+跑完 `build/` 里会出现 `spritesheet.webp` 和 `pet.json`，丢进 `~/.codex/pets/一个新名字/` 里就是一只新宠物。
 
-拼装时有两个容易踩的坑，脚本里已经处理好：
+拼接时还有两个坑，脚本里已经处理好了，但你如果自己写，需要留意：
 
-1. 每行帧数是硬要求，多出来的列必须留全透明，否则校验报 `unused column is not transparent`
-2. WebP 必须用 `exact=True` 保存，否则全透明像素会被写回 RGB，触发 `transparent RGB residue` 报错
+1. **每行帧数是硬要求**，多余格子必须全透明（见上面那条硬规矩）。
+2. **WebP 必须用 `exact=True` 保存**。否则那些全透明的像素会悄悄把 RGB 值写回去，校验会报 `transparent RGB residue`。
 
 ## 许可与声明
 
-- 本仓库的脚本与打包代码：MIT，见 [LICENSE](LICENSE)
-- 角色「阿蕾奇诺」及《原神》相关设定的著作权归米哈游（HoYoverse）所有。本仓库的美术素材是**非商业同人作品**，仅供个人使用，不得用于商业用途。详见 [NOTICE.md](NOTICE.md)
-- 与米哈游、OpenAI 均无关联，未获官方授权或背书
+- 本仓库的脚本和打包代码：MIT 许可，见 [LICENSE](LICENSE)
+- 角色「阿蕾奇诺」以及《原神》相关设定，著作权归米哈游（HoYoverse）所有。本仓库的美术素材是**非商业同人作品**，仅供个人使用，请勿商用。详见 [NOTICE.md](NOTICE.md)
+- 与米哈游、OpenAI 均无隶属关系，未获官方授权或背书
 
 ## English
 
-Custom pet skins for the Codex / ChatGPT desktop app. Copy a folder from `pets/` into `~/.codex/pets/`, fully quit and relaunch the app, then pick the pet under Settings → Personalization → Pets.
+Custom pet skins for the Codex / ChatGPT desktop app. A pet is just a folder: copy one from `pets/` into `~/.codex/pets/`, fully quit the app from the tray icon (not just minimize), relaunch it, then pick the pet under Settings → Personalization → Pets. No command line needed — the install scripts only copy the folder for you.
 
-`arlecchino-chibi` has per-state generated poses; `arlecchino-chibi-v2` is derived from a single front-view illustration using affine transforms only. Both follow the v2 contract: 1536×2288, 8×11 grid, 192×208 cells, `spriteVersionNumber: 2`.
+`arlecchino-chibi` has hand-made poses for every state; `arlecchino-chibi-v2` is derived from a single front-view illustration using affine transforms only. Both follow the v2 contract: 1536×2288 canvas, 8×11 grid, 192×208 cells, transparent background, `spriteVersionNumber: 2`.
 
 Fan art. Arlecchino and Genshin Impact are © HoYoverse. Non-commercial personal use only. Not affiliated with HoYoverse or OpenAI.
