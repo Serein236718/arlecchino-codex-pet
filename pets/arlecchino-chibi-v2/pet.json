@@ -1,0 +1,7 @@
+{
+  "id": "arlecchino-chibi-v2",
+  "displayName": "阿蕾奇诺 原型版",
+  "description": "由单张本地原型图（frames_clean320/frame_00.png）仿射派生，未重绘：礼帽黑红礼服造型，全部动作为缩放、倾斜、镜像的确定性变换。",
+  "spriteVersionNumber": 2,
+  "spritesheetPath": "spritesheet.webp"
+}
