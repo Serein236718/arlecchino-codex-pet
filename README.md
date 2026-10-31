@@ -20,7 +20,7 @@
 ### Windows（PowerShell）
 
 ```powershell
-git clone https://github.com/<你的用户名>/arlecchino-codex-pet.git
+git clone https://github.com/Serein236718/arlecchino-codex-pet.git
 cd arlecchino-codex-pet
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
@@ -34,7 +34,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1 -Pet arlecchino-chibi
 ### macOS / Linux
 
 ```bash
-git clone https://github.com/<你的用户名>/arlecchino-codex-pet.git
+git clone https://github.com/Serein236718/arlecchino-codex-pet.git
 cd arlecchino-codex-pet
 bash install.sh              # 全部安装
 bash install.sh arlecchino-chibi   # 只装一个
